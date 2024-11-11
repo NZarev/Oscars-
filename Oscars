@@ -1,0 +1,33 @@
+import java.util.Scanner;
+
+public class Oscars {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        String actorName = scanner.nextLine();
+        double initialPoints = scanner.nextDouble();
+        int numJudges = scanner.nextInt();
+        scanner.nextLine();  // Consume newline
+
+        double totalPoints = initialPoints;
+
+        for (int i = 0; i < numJudges; i++) {
+            String judgeName = scanner.nextLine();
+            double judgePoints = scanner.nextDouble();
+            scanner.nextLine();  // Consume newline
+
+            double pointsFromJudge = (judgeName.length() * judgePoints) / 2;
+            totalPoints += pointsFromJudge;
+
+            if (totalPoints > 1250.5) {
+                System.out.printf("Congratulations, %s got a nominee for leading role with %.1f!%n", actorName, totalPoints);
+                scanner.close();
+                return;
+            }
+        }
+
+        double neededPoints = 1250.5 - totalPoints;
+        System.out.printf("Sorry, %s you need %.1f more!%n", actorName, neededPoints);
+        scanner.close();
+    }
+}
